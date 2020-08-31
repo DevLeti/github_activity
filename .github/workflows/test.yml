@@ -1,0 +1,40 @@
+name: test
+
+# 어떤 조건에 workflow를 발생 시킬지.
+on: 
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+# array형식도 가능. --> on: [pull_request, issues]
+# on: push
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -p pip install --upgrade pip
+        pip install beautifulsoup4
+    - name: Lint with flake8
+      run: |
+        $CONDA/bin/conda install flake8
+        # stop the build if there are Python syntax errors or undefined names
+        $CONDA/bin/flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        $CONDA/bin/flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        echo " start "
+    - name: test run
+      run: |
+        python3 -h
