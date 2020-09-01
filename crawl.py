@@ -6,8 +6,8 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-print('start crawl')
-user_name = os.getenv('$USERNAME')
+print('start py')
+user_name = os.getenv('GITHUB_ACTOR')
 print(user_name)
 # req = requests.get('https://github.com/'+user_name)
 # soup = BeautifulSoup()
