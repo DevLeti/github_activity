@@ -50,10 +50,10 @@ jobs:
 #        github_token: $
 
 
-      - name: test run
-        inputs:
-          user_name:
-            description: 'get github username'
-            required: true
-        run: |
-          python3 crawl.py
+    - name: test run
+      inputs:
+        user_name:
+          description: 'get github username'
+          required: true
+      run: |
+        python3 crawl.py
