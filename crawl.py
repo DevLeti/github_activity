@@ -16,8 +16,17 @@ req = requests.get('https://github.com/'+user_name)
 html = req.content
 soup = BeautifulSoup(html, 'html.parser')
 datas = soup.select(
-    '#js-contribution-activity > div.contribution-activity-listing.float-left.col-12.col-lg-10 > div'
+    '#js-contribution-activity > div:nth-child(3) > div'
 )
 
-print(datas[0])
+latest_event = datas[0].find('span', class_ = 'float-left ws-normal text-left').text
+latest_event = latest_event.replace('\n', '').replace('        ', ' ').replace('      ','')[1:]
+print(latest_event)
+
+input = {latest_event}
+with open(os.path.join(BASE_DIR, 'event.json'), 'w+', encoding='utf-8') as json_file:
+    json.dump(input, json_file, ensure_ascii = False, indent = '\t')
+
+#print(datas[0])
+#print(datas[0].find('span', class_ = 'float-left ws-normal text-left').text)
 # type(datas[0]) == bs4.element.Tag
