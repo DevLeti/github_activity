@@ -20,17 +20,21 @@ datas = soup.select(
 )
 
 # date
-"구현 ㄱㄱㄱㄱ"
+latest_date = datas[0].find('h3', class_ = 'profile-timeline-month-heading bg-white d-inline-block h6 pr-2 py-1').text.replace('\n','').replace('      ','')
+print(latest_date)
 
 # event
 latest_event = datas[0].find('span', class_ = 'float-left ws-normal text-left').text
 latest_event = latest_event.replace('\n', '').replace('        ', ' ').replace('      ','')[1:]
 print(latest_event)
+repository = latest_event[latest_event.find('in')+2:latest_event.find('repository')]
 
-# input = {latest_event}
-# with open(os.path.join(BASE_DIR, 'event.json'), 'w+', encoding='utf-8') as json_file:
-#     json.dump(input, json_file, ensure_ascii = False, indent = '\t')
+if(int(repository) != 1):
+    
 
-#print(datas[0])
-#print(datas[0].find('span', class_ = 'float-left ws-normal text-left').text)
-# type(datas[0]) == bs4.element.Tag
+latest_json = {'date' : latest_date, 'event' : latest_event}
+print(latest_json)
+
+# TODO
+# ajax 크롤링.
+# fakeuseragent 사용해서 header달아서 request.
