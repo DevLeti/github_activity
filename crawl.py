@@ -29,7 +29,7 @@ latest_event = latest_event.replace('\n', '').replace('        ', ' ').replace('
 print(latest_event)
 repository = latest_event[latest_event.find('in')+2:latest_event.find('repository')]
 
-#if(int(repository) != 1):
+if(int(repository) != 1):
     
 
 latest_json = {'date' : latest_date, 'event' : latest_event}
