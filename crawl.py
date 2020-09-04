@@ -34,7 +34,10 @@ repository = latest_event[latest_event.find('in')+2:latest_event.find('repositor
 
 latest_json = {'date' : latest_date, 'event' : latest_event}
 print(latest_json)
+print("crawl completed.")
 
+with open(os.path.join(BASE_DIR, 'activity.json), 'w+', encoding='utf-8') as json_file:
+    json.dump(latest_json, json_file, ensure_ascii = False, indent = '\t')
 # TODO
 # ajax 크롤링.
 # fakeuseragent 사용해서 header달아서 request.
