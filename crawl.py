@@ -9,8 +9,8 @@ import json
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 print('start py')
-# user_name = os.getenv('GITHUB_ACTOR') #DevLeti
-user_name = "DevLeti"
+user_name = os.getenv('GITHUB_ACTOR') #DevLeti
+# user_name = "DevLeti"
 print(user_name)
 req = requests.get('https://github.com/'+user_name)
 html = req.content
@@ -38,6 +38,7 @@ print("crawl completed.")
 
 with open(os.path.join(BASE_DIR, 'activity.json), 'w+', encoding='utf-8') as json_file:
     json.dump(latest_json, json_file, ensure_ascii = False, indent = '\t')
+
 # TODO
 # ajax 크롤링.
 # fakeuseragent 사용해서 header달아서 request.
