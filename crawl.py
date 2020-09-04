@@ -36,7 +36,7 @@ latest_json = {'date' : latest_date, 'event' : latest_event}
 print(latest_json)
 print("crawl completed.")
 
-with open(os.path.join(BASE_DIR, 'activity.json), 'w+', encoding='utf-8') as json_file:
+with open(os.path.join(BASE_DIR, 'activity.json'), 'w+', encoding='utf-8') as json_file:
     json.dump(latest_json, json_file, ensure_ascii = False, indent = '\t')
 
 # TODO
