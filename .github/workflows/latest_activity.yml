@@ -21,16 +21,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    if: ${GITHUB_REPOSITORY} != 'DevLeti/github_activity'
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
     - name: Install dependencies
+      if: ${GITHUB_REPOSITORY} != 'DevLeti/github_activity'
       run: |
         pip install -r requirements.txt
     - name: Lint with flake8
+      if: ${GITHUB_REPOSITORY} != 'DevLeti/github_activity'
       run: |
         $CONDA/bin/conda install flake8
         # stop the build if there are Python syntax errors or undefined names
@@ -38,18 +38,22 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         $CONDA/bin/flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: test run
+      if: ${GITHUB_REPOSITORY} != 'DevLeti/github_activity'
       run: |
         echo "crawl.py"
     - name: rename main_README.md to README.md
+      if: ${GITHUB_REPOSITORY} != 'DevLeti/github_activity'
       run: |
         rename main_README.md README.md
     - name: Commits
+      if: ${GITHUB_REPOSITORY} != 'DevLeti/github_activity'
       run: |
         git config --local user.email "GithubActivity@email"
         git config --local user.name "Github_Activity" # 커밋에 포함될 이름
         git add README.md
         git commit -m "Auto - Update data with Crawling" # 커밋 메세지
     - name: Push
+      if: ${GITHUB_REPOSITORY} != 'DevLeti/github_activity'
       uses: ad-m/github-push-action@master
       with:
         branch: 'master'
