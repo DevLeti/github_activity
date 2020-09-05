@@ -1,7 +1,7 @@
 name: latest_activity
 
-# todo : github activity 크롤링 코드 작성 --> json으로 저장하는 코드 구현
 # todo : ajax로 read more 한 다음 더 가져올 수 있을 지?
+# todo : action 일으킨 repository가 DevLeti/github_activity면 전부 스킵하게 작성.
 # todo : github readme.md에서 수정한 다음 push하는 코드 작성 -> json을 push하는 방식으로.
 
 # 어떤 조건에 workflow를 발생 시킬지.

@@ -6,9 +6,6 @@ import json
 
 #https://chanhuiseok.github.io/posts/git-1/#2-github-action%EC%9C%BC%EB%A1%9C-%ED%81%AC%EB%A1%A4%EB%9F%AC-%EC%9E%90%EB%8F%99-%EC%8B%A4%ED%96%89-%EB%B0%8F-push-%ED%95%98%EA%B8%B0
 
-if (os.getenv('GITHUB_REPOSITORY') == 'DevLeti/github_activity'):
-    exit(1)
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 print('start py')
@@ -82,8 +79,6 @@ for line in r_arr:
     r.write(line)
 r.close()
 print("write completed.")
-
-exit(1)
 
 # TODO
 # ajax 크롤링.
