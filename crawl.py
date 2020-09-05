@@ -83,7 +83,7 @@ for line in r_arr:
 r.close()
 print("write completed.")
 
-return 1
+exit(1)
 
 # TODO
 # ajax 크롤링.
