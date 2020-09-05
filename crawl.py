@@ -9,8 +9,8 @@ import json
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 print('start py')
-user_name = os.getenv('GITHUB_ACTOR') #DevLeti
-# user_name = "DevLeti"
+#user_name = os.getenv('GITHUB_ACTOR') #DevLeti
+user_name = "DevLeti"
 print(user_name)
 req = requests.get('https://github.com/'+user_name)
 html = req.content
@@ -38,6 +38,47 @@ print("crawl completed.")
 
 with open(os.path.join(BASE_DIR, 'activity.json'), 'w+', encoding='utf-8') as json_file:
     json.dump(latest_json, json_file, ensure_ascii = False, indent = '\t')
+
+md_text = requests.get('https://raw.githubusercontent.com/{0}/{1}/master/README.md'.format(user_name, user_name)).text
+f = open('main_README.md','w', encoding="UTF8")
+f.writelines(md_text)
+f.close()
+
+r = open('main_README.md', 'r', encoding ='UTF8')
+r_arr = r.readlines()
+r.close()
+
+start_failed = False
+end_failed = False
+for i in range(0, len(r_arr)):
+    start = r_arr.index('  <!--START:activity-->\n')
+    end = r_arr.index('  <!--END:activity-->\n')
+    if(start != -1): #found start point
+        if(end != -1): #found end point
+            for i in range (start +1, end):
+                del r_arr[i]
+        else:
+            print("end point not found!")
+            start_failed = True
+            break
+    else:    
+        print("start point not found!")
+        end_failed = True
+        break
+
+# Error 발생
+if(start_failed):
+    raise ValueError('Start Point not found')
+elif(end_failed):
+    raise ValueError('End Point not found')
+
+r_arr[start] = r_arr[start] + '🌱 Date : {0}, Event : {1}\n'.format(latest_json['date'], latest_json['event'])
+
+r = open('main_README.md', 'w', encoding = 'UTF8')
+for line in r_arr:
+    r.write(line)
+r.close()
+print("write completed.")
 
 # TODO
 # ajax 크롤링.
