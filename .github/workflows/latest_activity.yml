@@ -38,7 +38,7 @@ jobs:
     - name: test run
       run: |
         echo "crawl.py"
-        result : python3 crawl.py
+        ::set-env name=result::python3 crawl.py
     - name: rename main_README.md to README.md
       if: result == 1
       run: |
