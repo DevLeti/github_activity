@@ -40,18 +40,18 @@ jobs:
         echo "crawl.py"
         ::set-env name=result::python3 crawl.py
     - name: rename main_README.md to README.md
-      if: ${{result}} == 1
+      if: ${{env.result}} == 1
       run: |
         rename main_README.md README.md
     - name: Commits
-      if: ${{result}} == 1
+      if: ${{env.result}} == 1
       run: |
         git config --local user.email "GithubActivity@email"
         git config --local user.name "Github_Activity" # 커밋에 포함될 이름
         git add README.md
         git commit -m "Auto - Update data with Crawling" # 커밋 메세지
     - name: Push
-      if: ${{result}} == 1
+      if: ${{env.result}} == 1
       uses: ad-m/github-push-action@master
       with:
         branch: 'master'
