@@ -21,6 +21,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    if: ${GITHUB_REPOSITORY} != 'DevLeti/github_activity'
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
@@ -38,20 +40,16 @@ jobs:
     - name: test run
       run: |
         echo "crawl.py"
-        result: python3 crawl.py
     - name: rename main_README.md to README.md
-      if: ${{env.result}} == 1
       run: |
         rename main_README.md README.md
     - name: Commits
-      if: ${{env.result}} == 1
       run: |
         git config --local user.email "GithubActivity@email"
         git config --local user.name "Github_Activity" # 커밋에 포함될 이름
         git add README.md
         git commit -m "Auto - Update data with Crawling" # 커밋 메세지
     - name: Push
-      if: ${{env.result}} == 1
       uses: ad-m/github-push-action@master
       with:
         branch: 'master'
