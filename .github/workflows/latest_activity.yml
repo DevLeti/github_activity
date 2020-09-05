@@ -39,6 +39,9 @@ jobs:
       run: |
         python3 crawl.py
         echo "README.md generated."
+    - name: rename main_README.md to README.md
+      run: |
+        rename main_README.md README.md
     - name: Commits
       run: |
         git config --local user.email "GithubActivity@email"
