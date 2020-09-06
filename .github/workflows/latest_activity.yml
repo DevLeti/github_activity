@@ -5,7 +5,11 @@ name: latest_activity
 # todo : github readme.md에서 수정한 다음 push하는 코드 작성 -> json을 push하는 방식으로.
 
 # 어떤 조건에 workflow를 발생 시킬지.
-on: push
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 # array형식도 가능. --> on: [pull_request, issues]
 # on: push
 
